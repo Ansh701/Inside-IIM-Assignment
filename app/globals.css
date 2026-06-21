@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+/*
+  ────────────────────────────────────────────────────────────────────────────
+  "Terminal Luxe" design system — dark, premium, with a living aurora that
+  tints to the verdict colour. Tailwind v4 reads @theme and generates utilities
+  (e.g. --color-invest -> text-invest / bg-invest; --font-display -> font-display).
+  ────────────────────────────────────────────────────────────────────────────
+*/
+@theme {
+  /* Type — distinctive display, clean body, mono for data */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Canvas + ink */
+  --color-bg: #070709;
+  --color-surface: #0d0d14;
+  --color-foreground: #f3f3f8;
+  --color-muted: #9090a8;
+  --color-faint: #5b5b73;
+  --color-border: rgba(255, 255, 255, 0.09);
+
+  /* Aurora / brand accents */
+  --color-cyan: #22d3ee;
+  --color-indigo: #6366f1;
+  --color-magenta: #e879f9;
+
+  /* Verdict + semantic */
+  --color-invest: #10d295; /* emerald */
+  --color-pass: #fb4d6a; /* rose    */
+  --color-warn: #f5a524; /* amber (risks) */
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-cyan) 35%, transparent);
+  color: #fff;
+}
+
+/* Slim, on-theme scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+  background-clip: padding-box;
+}
+
+/* ── Glass panels (single blur layer — keeps it 60fps) ───────────────────── */
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+.glass-strong {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+/* Gradient-clipped text for accents */
+.text-gradient {
+  background: linear-gradient(
+    115deg,
+    var(--color-cyan),
+    var(--color-indigo) 52%,
+    var(--color-magenta)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Aurora background ───────────────────────────────────────────────────── */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      120% 120% at 50% -10%,
+      rgba(99, 102, 241, 0.12),
+      transparent 60%
+    ),
+    var(--color-bg);
+}
+.aurora__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.5;
+  will-change: transform;
+  transition: background 1200ms ease;
+}
+.aurora__blob--1 {
+  width: 46vw;
+  height: 46vw;
+  left: -8vw;
+  top: -12vh;
+  background: var(--aurora-1);
+  animation: drift1 24s ease-in-out infinite;
+}
+.aurora__blob--2 {
+  width: 40vw;
+  height: 40vw;
+  right: -6vw;
+  top: 4vh;
+  background: var(--aurora-2);
+  animation: drift2 28s ease-in-out infinite;
+}
+.aurora__blob--3 {
+  width: 38vw;
+  height: 38vw;
+  left: 28vw;
+  bottom: -16vh;
+  background: var(--aurora-3);
+  animation: drift3 32s ease-in-out infinite;
+}
+/* tone presets */
+.aurora--neutral {
+  --aurora-1: var(--color-cyan);
+  --aurora-2: var(--color-indigo);
+  --aurora-3: var(--color-magenta);
+}
+.aurora--invest {
+  --aurora-1: var(--color-invest);
+  --aurora-2: var(--color-cyan);
+  --aurora-3: #34d399;
+}
+.aurora--pass {
+  --aurora-1: var(--color-pass);
+  --aurora-2: var(--color-warn);
+  --aurora-3: var(--color-magenta);
+}
+/* fine grain for texture */
+.aurora__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes drift1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(6vw, 5vh) scale(1.12);
+  }
+  66% {
+    transform: translate(-4vw, -3vh) scale(0.94);
+  }
+}
+@keyframes drift2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-7vw, 4vh) scale(0.9);
+  }
+  66% {
+    transform: translate(5vw, -5vh) scale(1.1);
+  }
+}
+@keyframes drift3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6vw, -6vh) scale(1.15);
+  }
+}
+
+/* shimmer for skeleton/scan effects */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora__blob {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

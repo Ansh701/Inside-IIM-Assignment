@@ -210,6 +210,13 @@ speculatives.
 
 ![Result view](docs/screenshots/result.png)
 
+### Light & dark themes
+
+**Light is the default**; a header toggle flips to dark and the choice is remembered (localStorage,
+applied before paint via a tiny inline script, so there's no flash on reload).
+
+![Dark theme](docs/screenshots/result-dark.png)
+
 ---
 
 ## What I'd improve with more time

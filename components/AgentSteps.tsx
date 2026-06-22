@@ -45,7 +45,7 @@ export function AgentSteps({ activeStep }: { activeStep: number }) {
                     ? "color-mix(in oklab, var(--color-invest) 16%, transparent)"
                     : state === "active"
                       ? "color-mix(in oklab, var(--color-cyan) 16%, transparent)"
-                      : "rgba(255,255,255,0.04)",
+                      : "var(--tint)",
                 color:
                   state === "done"
                     ? "var(--color-invest)"

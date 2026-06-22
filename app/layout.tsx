@@ -32,9 +32,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bricolage.variable} ${geist.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-dvh antialiased">{children}</body>
+      <body className="min-h-dvh antialiased">
+        {/*
+          Apply the saved theme before paint so there's no flash. Light is the
+          default; we only add `dark` if the user previously chose it.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})();",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

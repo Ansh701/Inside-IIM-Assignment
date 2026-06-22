@@ -95,3 +95,13 @@ the exact dependency list for approval before installing anything.
   from the public repo, set the env vars, and polled the deploy to `live`.
 - **Live:** <https://investment-research-agent-rioi.onrender.com> — verified in production
   (`POST /api/research {company:"Apple"}` → INVEST 85 in ~9s; homepage 200).
+
+### 8 — Two-theme system (post-review)
+
+- Reworked the palette into **light (default) + dark**, driven by CSS variables, so toggling a `.dark`
+  class on `<html>` re-themes every Tailwind v4 utility at runtime.
+- Header toggle persists the choice in `localStorage`; an inline script applies it before paint (no
+  flash), and `suppressHydrationWarning` stops React from stripping the pre-applied class.
+- Contrast pass: frostier glass (text no longer competes with the aurora), stronger muted/faint colours,
+  theme-aware accents + gauge track, and neutral tints via helper vars (`--tint`, `--hairline`) instead
+  of hard-coded white. Verified both themes + persistence with headless Edge.

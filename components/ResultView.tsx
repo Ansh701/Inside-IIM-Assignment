@@ -69,7 +69,7 @@ export function ResultView({ result }: { result: ResearchResult }) {
           {result.queries.map((q) => (
             <span
               key={q}
-              className="rounded-full border border-border bg-white/[0.03] px-3 py-1 font-mono text-xs text-muted"
+              className="rounded-full border border-border bg-[var(--tint)] px-3 py-1 font-mono text-xs text-muted"
             >
               {q}
             </span>
@@ -123,7 +123,7 @@ export function ResultView({ result }: { result: ResearchResult }) {
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition hover:border-border hover:bg-white/[0.03]"
+                className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition hover:border-border hover:bg-[var(--tint)]"
               >
                 <ExternalLink
                   size={15}

@@ -11,6 +11,7 @@ import {
   Diamond,
 } from "lucide-react";
 import { Aurora, type Tone } from "./Aurora";
+import { ThemeToggle } from "./ThemeToggle";
 import { AgentSteps } from "./AgentSteps";
 import { ResultView } from "./ResultView";
 import type { ResearchResult } from "@/lib/types";
@@ -98,14 +99,17 @@ export function ResearchApp() {
               Research Agent
             </span>
           </button>
-          {status !== "idle" && (
-            <button
-              onClick={reset}
-              className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted transition hover:border-white/20 hover:text-foreground"
-            >
-              <RotateCcw size={13} /> New search
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {status !== "idle" && (
+              <button
+                onClick={reset}
+                className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs text-muted transition hover:border-[var(--hairline)] hover:text-foreground"
+              >
+                <RotateCcw size={13} /> New search
+              </button>
+            )}
+            <ThemeToggle />
+          </div>
         </header>
 
         {/* Body */}
@@ -175,7 +179,7 @@ function Idle({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="mx-auto w-full max-w-2xl text-center"
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-[var(--tint)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
         <Sparkles size={12} className="text-cyan" /> AI agent · live web research
       </span>
 
@@ -222,7 +226,7 @@ function Idle({
           <button
             key={name}
             onClick={() => onSubmit(name)}
-            className="rounded-full border border-border bg-white/[0.02] px-3 py-1 text-sm text-muted transition hover:border-white/20 hover:text-foreground"
+            className="rounded-full border border-border bg-[var(--tint)] px-3 py-1 text-sm text-muted transition hover:border-[var(--hairline)] hover:text-foreground"
           >
             {name}
           </button>

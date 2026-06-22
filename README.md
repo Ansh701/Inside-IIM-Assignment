@@ -6,7 +6,7 @@
 
 Built as a take-home for **InsideIIM × Altuni AI Labs**.
 
-**Live demo:** _added after deployment_ <!-- RENDER_URL -->
+**🔗 Live demo: <https://investment-research-agent-rioi.onrender.com>**
 _(Hosted on Render's free tier — the first request may take ~30–60s to wake from a cold start.)_
 
 ![Hero](docs/screenshots/hero.png)

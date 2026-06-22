@@ -87,3 +87,11 @@ the exact dependency list for approval before installing anything.
 - Real runs captured for the README:
   - `Coca-Cola` → **INVEST** 75/100 (blue-chip)
   - `Beyond Meat` → **PASS** 85/100 (speculative)
+
+### 7 — Ship
+
+- Pushed to GitHub as 5 concern-grouped commits — no secrets (verified with `git grep` on tracked files).
+- Deployed to **Render** (free Web Service) via the Render API: fetched the owner, created the service
+  from the public repo, set the env vars, and polled the deploy to `live`.
+- **Live:** <https://investment-research-agent-rioi.onrender.com> — verified in production
+  (`POST /api/research {company:"Apple"}` → INVEST 85 in ~9s; homepage 200).
